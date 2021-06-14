@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="MD5 online hash file checksum function">
+    <title>Vulnarablity
+    </title>
+    <script>
+      if (location.hostname != 'localhost') {
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-44208259-6', 'auto');
+        ga('send', 'pageview');
+      }
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+  </head>
+  <body>
+    <div id="header">
+      <h1><a href="index.html">Product Vulnarablity</a></h1>
+    </div>
+    <div id="body">
+      <script src="js/main.js"></script>
+      <div id="main">
+        <h1>Product Vulnarablity
+        </h1>
+        <div class="description">Product Vulnarablity using checksum
+        </div>
+        <div class="input">
+          <div id="droppable-zone">
+            <div id="droppable-zone-wrapper">
+              <div id="droppable-zone-text">Drop File Here</div>
+            </div>
+            <input class="droppable-file" id="input" type="file" placeholder="Input2">
+          </div>
+        </div>
+        <div class="submit">
+          <input class="btn btn-default" id="execute" type="button" value="Hash">
+          <label>
+            <input id="auto-update" type="checkbox" value="1" checked="checked">Auto Update
+          </label>
+        </div>
+        <div class="output">
+          <textarea id="output" placeholder="Output"></textarea>
+        </div>
+
+        <button onclick="logIt()" class="btn btn-outline-info"> ok </button>
+
+      </div>
+      <div>
+        <br/>
+        <br/>
+        <br/>
+
+        <h3 id="source"></h3>
+        <h3 id="family"></h3>
+        <h3 id="platform"></h3>
+        <h3 id="malwareType"></h3>
+        <h3 id="detectionCoverage"></h3>
+        <h3 id="risk"></h3>
+
+        <!-- document.getElementById("family").innerHTML = data.malware.family; -->
+      </div>
+      <script src="https://cdn.jsdelivr.net/gh/emn178/js-md5/build/md5.min.js"></script>
+      <script>method = md5;</script>
+      <script>
+
+        function diplayData(data){
+          console.log(data)
+          document.getElementById("source").innerHTML ='Source: '+ data.malware.origins.external.source
+          document.getElementById("family").innerHTML ='Family: '+ data.malware.origins.external.family
+          document.getElementById("platform").innerHTML ='Platform: '+ data.malware.origins.external.platform
+          document.getElementById("malwareType").innerHTML ='Vulnarable To: '+ data.malware.origins.external.malwareType
+          document.getElementById("detectionCoverage").innerHTML ='Coverage: '+ data.malware.origins.external.detectionCoverage
+          document.getElementById("risk").innerHTML ='Risk Level: '+ data.malware.risk
+        }
+
+        function logIt(){
+          var x  = document.getElementById("output").value;
+          var resp;
+          console.log(x);
+          
+          fetch("https://api.xforce.ibmcloud.com/malware/"+x,{
+            headers: {
+              'Accept': 'application/json',
+              'Authorization': 'Basic ZDM4YzQwYjMtMDQ4Ni00OTU0LTk1YmItN2IwMTJjOTIyYmZhOmIxNjRhNjc3LWIxOWItNGQyMi04ZDk4LTE1NWIyZTJmOGMwYw=='
+            }
+          }).then(response => response.json())
+              .then(
+
+                data => diplayData(data)//data=> console.log(data)
+              
+              );
+              
+            }
+            </script>
+      
+
+    </div>
+    <div id="footer">&copy; Ashok</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+  </body>
+</html>
