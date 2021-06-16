@@ -1,6 +1,8 @@
 # THEART-INTELLIGENCE
 
-After downloading  the code run the code in the command prompt with the command "npm start"
+After downloading  the code 
+
+Install node using the command "node install" in the command prompt then run the code in the command prompt with the command "npm start"
 
 This project is used to check the vulerability of any file of files and also any type of application.
 
